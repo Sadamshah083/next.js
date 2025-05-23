@@ -1,14 +1,18 @@
 "use client";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "@/lib/features/TodoState/TodoSlice";
+import {
+  addTodo,
+  deleteTodo,
+  updateTodo,
+} from "@/lib/features/TodoState/TodoSlice";
 import { RootState } from "@/lib/store";
 
 const Page = () => {
   const [task, setTask] = useState("");
   // const [todos, setTodos] = useState<string[]>([]);
   const dispatch = useDispatch();
-  const todos = useSelector((state: RootState) => state.todo.todos);
+  const todos = useSelector((state: RootState) => state.todo.todo);
   const [editID, setEditID] = useState(null);
   const handleAdd = () => {
     if (editID !== null) {
@@ -22,13 +26,15 @@ const Page = () => {
     setEditID(null);
   };
   const handleDelete = (index: number) => {
-    const newTodos = todos.filter((_, i) => i !== index);
+    // const newTodos = todos.filter((_, i) => i !== index);
     //  setTodos(newTodos);
+    dispatch(deleteTodo(index));
   };
   const editHandle = (index: number) => {
-    const todoToEdit = todos[index];
-    setTask(todoToEdit);
-    setEditID(index);
+    // const todoToEdit = todos[index];
+    // setTask(todoToEdit);
+    // setEditID(index);
+    dispatch(updateTodo({ index, task }));
   };
 
   return (
