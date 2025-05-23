@@ -36,8 +36,13 @@ export default function Counter() {
             >
               +
             </button>
-            <button onClick={() => dispatch(reset())}>Reset</button>
           </div>
+          <button
+            className="bg-green-300 p-2 mt-3 rounded-2xl w-[150px] shadow-md"
+            onClick={() => dispatch(reset())}
+          >
+            Reset
+          </button>
         </div>
       </div>
     </div>
