@@ -12,11 +12,13 @@ const Page = () => {
   const [task, setTask] = useState("");
   // const [todos, setTodos] = useState<string[]>([]);
   const dispatch = useDispatch();
-  const todos = useSelector((state: RootState) => state.todo.todo);
+  const todos = useSelector((state: RootState) => state.todo.todos);
   const [editID, setEditID] = useState(null);
+  const variable = 10;
   const handleAdd = () => {
     if (editID !== null) {
       //  setTodos(todos.map((todo, index) => (index === editID ? task : todo)));
+      dispatch(updateTodo({ editID, task }));
     } else {
       //  setTodos([...todos, task]);
       dispatch(addTodo(task));
@@ -31,10 +33,11 @@ const Page = () => {
     dispatch(deleteTodo(index));
   };
   const editHandle = (index: number) => {
-    // const todoToEdit = todos[index];
-    // setTask(todoToEdit);
-    // setEditID(index);
-    dispatch(updateTodo({ index, task }));
+    const todoToEdit = todos[index];
+    //alert(index);
+    setTask(todoToEdit);
+    setEditID(index);
+    // dispatch(updateTodo({ index, task }));
   };
 
   return (

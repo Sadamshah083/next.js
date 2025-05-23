@@ -2,7 +2,7 @@
 import { Action, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
-  todo: [],
+  todos: [],
 };
 
 export const todoSlice = createSlice({
@@ -10,17 +10,17 @@ export const todoSlice = createSlice({
   initialState,
   reducers: {
     addTodo: (state, action) => {
-      state.todo.push(action.payload);
+      state.todos.push(action.payload);
     },
     //     deleteTodo: (state, action) => {
     // state.todo.slice(action.payload)
     //}
     deleteTodo: (state, action) => {
-      state.todo.splice(action.payload, 1);
+      state.todos.splice(action.payload, 1);
     },
     updateTodo: (state, action) => {
-      const { index, task } = action.payload;
-      state.todo[index] = task;
+      const { editID, task } = action.payload;
+      state.todos[editID] = task;
     },
   },
 });
