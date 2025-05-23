@@ -1,14 +1,21 @@
 "use client";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo } from "@/lib/features/TodoState/TodoSlice";
+import { RootState } from "@/lib/store";
+
 const Page = () => {
   const [task, setTask] = useState("");
-  const [todos, setTodos] = useState<string[]>([]);
+  // const [todos, setTodos] = useState<string[]>([]);
+  const dispatch = useDispatch();
+  const todos = useSelector((state: RootState) => state.todo.todos);
   const [editID, setEditID] = useState(null);
   const handleAdd = () => {
     if (editID !== null) {
-      setTodos(todos.map((todo, index) => (index === editID ? task : todo)));
+      //  setTodos(todos.map((todo, index) => (index === editID ? task : todo)));
     } else {
-      setTodos([...todos, task]);
+      //  setTodos([...todos, task]);
+      dispatch(addTodo(task));
       setTask("");
     }
     setTask("");
@@ -16,13 +23,14 @@ const Page = () => {
   };
   const handleDelete = (index: number) => {
     const newTodos = todos.filter((_, i) => i !== index);
-    setTodos(newTodos);
+    //  setTodos(newTodos);
   };
   const editHandle = (index: number) => {
     const todoToEdit = todos[index];
     setTask(todoToEdit);
     setEditID(index);
   };
+
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow-md border border-gray-200">
       <h1 className="text-2xl font-bold mb-4 text-center text-green-700">
