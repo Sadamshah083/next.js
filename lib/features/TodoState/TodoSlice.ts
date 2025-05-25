@@ -21,7 +21,8 @@ export const todoSlice = createSlice({
     updateTodo: (state, action) => {
       const { editID, task } = action.payload;
       state.todos[editID] = task;
-    },
+      },
+    
   },
 });
 export const { addTodo, deleteTodo, updateTodo } = todoSlice.actions;
