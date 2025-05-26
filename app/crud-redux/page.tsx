@@ -23,6 +23,11 @@ const page = () => {
     setForm({ name: userToEdit.name, email: userToEdit.email });
     setEditID(index);
   };
+
+  const handleDelete = (index) => {
+    setUsers(users.filter((_, i) => i !== index));
+    if (editId === index) setEditID(null);
+  };
   return (
     <div>
       <input
@@ -57,6 +62,7 @@ const page = () => {
               >
                 Edit
               </button>
+              <button onClick={() => handleDelete(index)}>Delete</button>
             </div>
           );
         })}
