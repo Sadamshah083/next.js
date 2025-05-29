@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  users: [{ name: null, email: null }],
+  users: [],
 };
 
 export const crudSlice = createSlice({
@@ -15,8 +15,8 @@ export const crudSlice = createSlice({
       state.users.splice(action.payload, 1);
     },
     updateUser: (state, action) => {
-      const { index, user } = action.payload;
-      state.users[index] = user;
+      const { editID, user } = action.payload;
+      state.users[editID] = user;
     },
   },
 });

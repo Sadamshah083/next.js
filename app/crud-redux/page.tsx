@@ -12,50 +12,41 @@ const page = () => {
   const dispatch = useDispatch();
   const users = useSelector((state: RootState) => state.crud.users);
 
-  const [form, setForm] = useState({ name: "", email: "" });
+  const [user, setuser] = useState({ name: "", email: "" });
 
   const [editId, setEditID] = useState(null);
 
   const handleChange = (e: any) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setuser({ ...user, [e.target.name]: e.target.value });
   };
   const handleSubmit = () => {
     if (editId !== null) {
-      dispatch(updateUser({ index: editId, user: form }));
-      //setUsers(users.map((user, index) => (index === editId ? form : user)));
+      //Edit functionality
+      dispatch(updateUser({ editId, user }));
     } else {
-      // setUsers([...users, form]);
-      dispatch(addUser(form));
+      // add fuctionality
+      dispatch(addUser(user));
     }
 
-    setForm({ name: "", email: "" });
+    setuser({ name: "", email: "" });
   };
   const handleEdit = (index) => {
     const userToEdit = users[index];
-    //setForm({ name: userToEdit.name, email: userToEdit.email });
-    setForm(userToEdit);
+    setuser(userToEdit);
     setEditID(index);
   };
 
   const handleDelete = (index: any) => {
-    //setUsers(users.filter((_, i) => i !== index));
-    // if (editId === index) setEditID(null);
-
     dispatch(deleteUser(index));
   };
 
-  // const handleDelete = (index) => {
-  //   const userToEdit = users[index];
-  //   setForm({ name: userToEdit.name, email: userToEdit });
-  //   setUsers(index);
-  // };
   return (
     <div>
       <input
         name="name"
         type="text"
         placeholder="Name"
-        value={form.name}
+        value={user.name}
         onChange={handleChange}
       />
 
@@ -63,7 +54,7 @@ const page = () => {
         name="email"
         type="text"
         placeholder="Name"
-        value={form.email}
+        value={user.email}
         onChange={handleChange}
       />
       <button onClick={handleSubmit}>
