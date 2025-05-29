@@ -1,19 +1,9 @@
 "use client";
-import { RootState } from "@/lib/store";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addUser,
-  deleteUser,
-  updateUser,
-} from "@/lib/features/CrudState/CrudSlice";
 
 const page = () => {
-  const dispatch = useDispatch();
-  const users = useSelector((state: RootState) => state.crud.users);
-
   const [form, setForm] = useState({ name: "", email: "" });
-
+  const [users, setUsers] = useState([]);
   const [editId, setEditID] = useState(null);
 
   const handleChange = (e: any) => {
@@ -21,34 +11,23 @@ const page = () => {
   };
   const handleSubmit = () => {
     if (editId !== null) {
-      dispatch(updateUser({ index: editId, user: form }));
-      //setUsers(users.map((user, index) => (index === editId ? form : user)));
+      setUsers(users.map((user, index) => (index === editId ? form : user)));
     } else {
-      // setUsers([...users, form]);
-      dispatch(addUser(form));
+      setUsers([...users, form]);
     }
 
     setForm({ name: "", email: "" });
   };
   const handleEdit = (index) => {
     const userToEdit = users[index];
-    //setForm({ name: userToEdit.name, email: userToEdit.email });
-    setForm(userToEdit);
+    setForm({ name: userToEdit.name, email: userToEdit.email });
     setEditID(index);
   };
 
-  const handleDelete = (index: any) => {
-    //setUsers(users.filter((_, i) => i !== index));
-    // if (editId === index) setEditID(null);
-
-    dispatch(deleteUser(index));
+  const handleDelete = (index) => {
+    setUsers(users.filter((_, i) => i !== index));
+    if (editId === index) setEditID(null);
   };
-
-  // const handleDelete = (index) => {
-  //   const userToEdit = users[index];
-  //   setForm({ name: userToEdit.name, email: userToEdit });
-  //   setUsers(index);
-  // };
   return (
     <div>
       <input
