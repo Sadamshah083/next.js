@@ -16,8 +16,6 @@ const Page = () => {
     setProducts(data.products);
   };
 
-  
-
   useEffect(() => {
     fetchData();
   }, []);
