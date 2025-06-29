@@ -29,8 +29,8 @@ export default function RootLayout({
     <html lang="en">
       <StoreProvider>
         <body>
-          <Navigation />
-          <MobileNavigation />
+          {/* <Navigation /> */}
+          {/* <MobileNavigation /> */}
           {children}
         </body>
       </StoreProvider>

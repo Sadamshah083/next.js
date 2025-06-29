@@ -1,4 +1,6 @@
 "use client";
+
+import Link from "next/link";
 import React, { useState } from "react";
 const Page = () => {
   const [task, setTask] = useState("");
@@ -23,6 +25,7 @@ const Page = () => {
     setTask(todoToEdit);
     setEditID(index);
   };
+
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow-md border border-gray-200">
       <h1 className="text-2xl font-bold mb-4 text-center text-green-700">
@@ -62,6 +65,15 @@ const Page = () => {
             >
               Edit
             </button>
+            <Link
+              href={{
+                pathname: `/todo-details/${index}`,
+                query: { task: item },
+              }}
+              className="text-purple-600 hover:underline"
+            >
+              View
+            </Link>
           </li>
         ))}
       </ul>

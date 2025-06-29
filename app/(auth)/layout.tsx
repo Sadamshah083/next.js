@@ -13,8 +13,16 @@ const Authlayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className=" p-20 bg-gray-500 text-black gap-4  flex ">
       {navLinks.map((link) => {
+        const isActive =
+          pathname === link.href || pathname.startsWith(link.href);
         return (
-          <Link href={link.href} key={link.name}>
+          <Link
+            className={
+              isActive ? "text-blue-900 font-bold mr-4" : "text-white mr-4"
+            }
+            href={link.href}
+            key={link.name}
+          >
             {link.name}
           </Link>
         );
